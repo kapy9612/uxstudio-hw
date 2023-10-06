@@ -10,29 +10,24 @@ import {
 } from '@components/ProfilePicture/ProfilePicture';
 import { Typography, TypographyLevel } from '@components/Typography/Typography';
 
-import { Contact } from '@utils/types';
-
 import { TextColor } from '@styles/global';
 
-type ContactListItemProps = {
-    contact: Contact;
+export type ContactInfo = {
+    avatar: string;
+    name: string;
+    phone: string;
 };
-export function ContactInfo({ contact }: ContactListItemProps) {
+export function ContactInfo({ avatar, name, phone }: ContactInfo) {
     return (
         <StyledContactInfo>
-            <ProfilePicture
-                size={ProfilePictureSize.SMALL}
-                url={contact.avatar}
-            />
+            <ProfilePicture size={ProfilePictureSize.SMALL} url={avatar} />
             <StyledContactInfoTextWrapper>
-                <Typography level={TypographyLevel.H3}>
-                    {contact.name}
-                </Typography>
+                <Typography level={TypographyLevel.H3}>{name}</Typography>
                 <Typography
                     level={TypographyLevel.MESSAGE}
                     color={TextColor.SECONDARY}
                 >
-                    {contact.phone}
+                    {phone}
                 </Typography>
             </StyledContactInfoTextWrapper>
         </StyledContactInfo>

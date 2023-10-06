@@ -13,10 +13,8 @@ type Story = StoryObj<typeof ContactInfo>;
 
 export const Default: Story = {
     args: {
-        contact: {
-            name: 'Jonas Jones',
-            avatar: dummyAvatar.src,
-            phone: '+36 01 234 5678',
-        },
+        name: 'Jonas Jones',
+        avatar: dummyAvatar.src,
+        phone: '+36 01 234 5678',
     },
 };
