@@ -80,10 +80,10 @@ const H1: FC<TextProps> = ({ color, testId, ...props }) => {
     return (
         <StyledH1
             data-testid={testId}
-            size={FontSize.PX32}
-            lineHeight={LineHeight.PX48}
+            $size={FontSize.PX32}
+            $lineHeight={LineHeight.PX48}
             $fontFamily={FontFamily.GLYSA}
-            weight={FontWeight.MEDIUM}
+            $weight={FontWeight.MEDIUM}
             $color={color}
             {...props}
         />
@@ -93,10 +93,10 @@ const H1: FC<TextProps> = ({ color, testId, ...props }) => {
 const H2: FC<TextProps> = ({ color, testId, ...props }) => (
     <StyledH2
         data-testid={testId}
-        size={FontSize.PX24}
-        lineHeight={LineHeight.PX40}
+        $size={FontSize.PX24}
+        $lineHeight={LineHeight.PX40}
         $fontFamily={FontFamily.GLYSA}
-        weight={FontWeight.MEDIUM}
+        $weight={FontWeight.MEDIUM}
         $color={color}
         {...props}
     />
@@ -104,12 +104,12 @@ const H2: FC<TextProps> = ({ color, testId, ...props }) => (
 const H3: FC<TextProps> = ({ color, testId, ...props }) => (
     <StyledH3
         data-testid={testId}
-        size={FontSize.PX16}
-        lineHeight={LineHeight.PX24}
+        $size={FontSize.PX16}
+        $lineHeight={LineHeight.PX24}
         $fontFamily={FontFamily.LEXEND_DECA}
-        weight={FontWeight.REGULAR}
+        $weight={FontWeight.REGULAR}
         $color={color}
-        letterSpacing
+        $letterSpacing
         {...props}
     />
 );
@@ -118,12 +118,12 @@ const Body: FC<TextProps> = ({ color, testId, ...props }) => {
     return (
         <StyledBody
             data-testid={testId}
-            size={FontSize.PX14}
-            lineHeight={LineHeight.PX20}
+            $size={FontSize.PX14}
+            $lineHeight={LineHeight.PX20}
             $fontFamily={FontFamily.LEXEND_DECA}
-            weight={FontWeight.REGULAR}
+            $weight={FontWeight.REGULAR}
             $color={color}
-            letterSpacing
+            $letterSpacing
             {...props}
         />
     );
@@ -132,12 +132,12 @@ const Body: FC<TextProps> = ({ color, testId, ...props }) => {
 const Message: FC<TextProps> = ({ color, testId, ...props }) => (
     <StyledBody
         data-testid={testId}
-        size={FontSize.PX12}
-        lineHeight={LineHeight.PX12}
+        $size={FontSize.PX12}
+        $lineHeight={LineHeight.PX12}
         $fontFamily={FontFamily.LEXEND_DECA}
-        weight={FontWeight.REGULAR}
+        $weight={FontWeight.REGULAR}
         $color={color}
-        letterSpacing
+        $letterSpacing
         {...props}
     />
 );

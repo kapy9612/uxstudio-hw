@@ -7,7 +7,7 @@ import { GreyColor } from '@styles/global';
 import dummyPicture from '@assets/Default.png';
 
 export const StyledProfilePicture = styled.div<{
-    url?: string;
+    $url?: string;
     size?: ProfilePictureSize;
 }>`
     display: flex;
@@ -22,7 +22,7 @@ export const StyledProfilePicture = styled.div<{
     box-sizing: border-box;
     border: 1px solid ${GreyColor.G70};
     background-image: ${(props) =>
-        props.url ? `url(${props.url})` : `url(${dummyPicture.src})`};
+        props.$url ? `url(${props.$url})` : `url(${dummyPicture.src})`};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;

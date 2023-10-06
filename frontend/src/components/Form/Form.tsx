@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { BUTTON_TYPES, Button } from '@components/Button/Button';
 import { StyledButtonWrapper, StyledForm } from '@components/Form/Form.styled';
+import { PictureInputField } from '@components/PictureInputField/PictureInputField';
 import { TextField } from '@components/TextField/TextField';
 import { Typography, TypographyLevel } from '@components/Typography/Typography';
 
@@ -12,9 +13,23 @@ export type Form = {
     contact?: ContactType;
 };
 export function Form({ title, contact }: Form) {
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState<string>(contact?.name ? contact.name : '');
+    const [phone, setPhone] = useState<string>(
+        contact?.phone ? contact.phone : '',
+    );
+    const [email, setEmail] = useState<string>(
+        contact?.email ? contact.email : '',
+    );
+    const [file, setFile] = useState<File | null>(null);
+
+    const handleFileSelect = useCallback((file: File | null) => {
+        setFile(file);
+        if (file) {
+            console.log('Selected file:', file.name);
+        } else {
+            console.log('File removed');
+        }
+    }, []);
 
     return (
         <StyledForm
@@ -23,10 +38,11 @@ export function Form({ title, contact }: Form) {
                 console.log(name);
                 console.log(phone);
                 console.log(email);
+                console.log(file);
             }}
         >
             <Typography level={TypographyLevel.H2}>{title}</Typography>
-            {/*<ProfilePicture size={ProfilePictureSize.SMALL} url={avatar} />*/}
+            <PictureInputField onFileSelect={handleFileSelect} />
             <TextField
                 placeholder="Jamie Wright"
                 label="Name"

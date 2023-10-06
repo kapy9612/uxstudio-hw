@@ -50,9 +50,9 @@ export function PictureInputField({
             <ProfilePicture url={previewSrc!} size={ProfilePictureSize.BIG} />
             <StyledPictureInputLabel
                 htmlFor="hidden-file-input"
-                variant={BUTTON_TYPES.PRIMARY}
-                icon
-                label
+                $variant={BUTTON_TYPES.PRIMARY}
+                $icon="true"
+                $label="true"
                 ref={fileInputRef}
             >
                 {previewSrc ? (

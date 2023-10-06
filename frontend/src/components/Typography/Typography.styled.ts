@@ -11,32 +11,32 @@ import {
 import styled, { css } from 'styled-components';
 
 export type CommonTypographyProps = {
-    alignment?: TextAlign;
+    $alignment?: TextAlign;
     $color?: Colors;
     $fontFamily?: FontFamily;
-    lineHeight?: LineHeight;
-    size?: FontSize;
-    weight?: FontWeight;
-    opacity?: string;
-    letterSpacing?: boolean;
+    $lineHeight?: LineHeight;
+    $size?: FontSize;
+    $weight?: FontWeight;
+    $opacity?: string;
+    $letterSpacing?: boolean;
     $width?: string;
-    marginBottom?: SpacingToken | string;
+    $marginBottom?: SpacingToken | string;
 };
 
 export const commonTypographyStyles = css<CommonTypographyProps>`
     color: ${(props) => props.$color || TextColor.PRIMARY};
-    font-size: ${(props) => props.size || FontSize.PX16};
+    font-size: ${(props) => props.$size || FontSize.PX16};
     font-family: ${(props) => props.$fontFamily || FontFamily.LEXEND_DECA};
     font-style: normal;
-    font-weight: ${(props) => props.weight || FontWeight.REGULAR};
-    line-height: ${(props) => props.lineHeight};
-    text-align: ${(props) => props.alignment || TextAlign.LEFT};
-    opacity: ${(props) => props.opacity || ''};
+    font-weight: ${(props) => props.$weight || FontWeight.REGULAR};
+    line-height: ${(props) => props.$lineHeight};
+    text-align: ${(props) => props.$alignment || TextAlign.LEFT};
+    opacity: ${(props) => props.$opacity || ''};
     width: ${(props) => props.$width || ''};
-    letter-spacing: ${(props) => (props.letterSpacing ? '0.01rem' : 'unset')};
+    letter-spacing: ${(props) => (props.$letterSpacing ? '0.01rem' : 'unset')};
 
     //For simple Spacing
-    margin-bottom: ${(props) => props.marginBottom || ''};
+    margin-bottom: ${(props) => props.$marginBottom || ''};
 `;
 
 export const StyledBody = styled.span<CommonTypographyProps>`

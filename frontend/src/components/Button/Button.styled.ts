@@ -59,10 +59,10 @@ const handleButtonBgPressedColor = (variant: BUTTON_TYPES) => {
 };
 
 export type ButtonStyleProps = {
-    variant: BUTTON_TYPES;
+    $variant: BUTTON_TYPES;
     disabled?: boolean;
-    icon?: boolean;
-    label?: boolean;
+    $icon?: boolean;
+    $label?: boolean;
     reverse?: boolean;
     align?: AlignType;
 };
@@ -83,20 +83,20 @@ export const ButtonStyle = css<ButtonStyleProps>`
     justify-content: center;
     align-items: center;
     padding: ${(props) =>
-        !props.icon
+        !props.$icon
             ? '0.5rem 1rem'
-            : props.label
+            : props.$label
             ? '0.5rem 1rem 0.5rem 0.75rem'
             : '0.5rem'};
     gap: 0.5rem;
     flex-shrink: 0;
     //Other Styles
     border: ${(props) =>
-        props.variant !== BUTTON_TYPES.SPECIAL
+        props.$variant !== BUTTON_TYPES.SPECIAL
             ? `none`
             : `1px solid ${GreyColor.G20}`};
     border-radius: ${(props) =>
-        props.variant === BUTTON_TYPES.SPECIAL ? '62.5rem' : '0.5rem'};
+        props.$variant === BUTTON_TYPES.SPECIAL ? '62.5rem' : '0.5rem'};
     width: fit-content;
     box-sizing: border-box;
     margin: 0;
@@ -108,15 +108,15 @@ export const ButtonStyle = css<ButtonStyleProps>`
         opacity 0.3s ease-in-out,
         transform 0.3s ease-in-out;
     color: ${TextColor.PRIMARY};
-    background: ${(props) => handleButtonBgColor(props.variant)};
+    background: ${(props) => handleButtonBgColor(props.$variant)};
     text-decoration: none;
 
     &:hover {
-        background: ${(props) => handleButtonBgHoverColor(props.variant)};
+        background: ${(props) => handleButtonBgHoverColor(props.$variant)};
     }
 
     &:active {
-        background: ${(props) => handleButtonBgPressedColor(props.variant)};
+        background: ${(props) => handleButtonBgPressedColor(props.$variant)};
     }
 
     &:disabled {

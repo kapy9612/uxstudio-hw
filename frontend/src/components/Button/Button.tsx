@@ -41,11 +41,11 @@ export function Button({
         <StyledButton
             data-testid={testId}
             onClick={link && link !== '' ? navigateToLink(link!) : onClick}
-            variant={variant}
+            $variant={variant}
             disabled={disabled}
             type={type}
-            icon={!!icon}
-            label={!!label}
+            $icon={!!icon}
+            $label={!!label}
             reverse={reverse}
             align={align}
         >

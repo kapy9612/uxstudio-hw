@@ -12,5 +12,5 @@ type ProfilePictureProps = {
     size?: ProfilePictureSize;
 };
 export function ProfilePicture({ url, size }: ProfilePictureProps) {
-    return <StyledProfilePicture url={url} size={size} />;
+    return <StyledProfilePicture $url={url} size={size} />;
 }
