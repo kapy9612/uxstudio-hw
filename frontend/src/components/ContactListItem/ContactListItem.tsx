@@ -28,17 +28,26 @@ export function ContactListItem({ contact }: ContactListItemProps) {
         {
             icon: <SettingsIcon />,
             label: 'Edit',
-            onClick: () => console.error('Unsupported function!'),
+            onClick: () => {
+                setVisible(false);
+                console.error('Unsupported function!');
+            },
         },
         {
             icon: <FavouriteIcon />,
             label: 'Favourite',
-            onClick: () => console.error('Unsupported function!'),
+            onClick: () => {
+                setVisible(false);
+                console.error('Unsupported function!');
+            },
         },
         {
             icon: <DeleteIcon />,
             label: 'Remove',
-            onClick: () => console.error('Unsupported function!'),
+            onClick: () => {
+                setVisible(false);
+                console.error('Unsupported function!');
+            },
         },
     ];
 
