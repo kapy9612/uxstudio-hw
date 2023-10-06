@@ -10,14 +10,12 @@ import {
 } from '@components/ProfilePicture/ProfilePicture';
 import { Typography, TypographyLevel } from '@components/Typography/Typography';
 
+import { ContactType } from '@utils/types';
+
 import { TextColor } from '@styles/global';
 
-export type ContactInfo = {
-    avatar: string;
-    name: string;
-    phone: string;
-};
-export function ContactInfo({ avatar, name, phone }: ContactInfo) {
+export type ContactInfoType = Omit<ContactType, 'email'>;
+export function ContactInfo({ avatar, name, phone }: ContactInfoType) {
     return (
         <StyledContactInfo>
             <ProfilePicture size={ProfilePictureSize.SMALL} url={avatar} />

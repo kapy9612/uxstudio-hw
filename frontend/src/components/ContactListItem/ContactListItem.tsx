@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 
 import { BUTTON_TYPES, Button } from '@components/Button/Button';
-import { ContactInfo } from '@components/ContactInfo/ContactInfo';
+import {
+    ContactInfo,
+    ContactInfoType,
+} from '@components/ContactInfo/ContactInfo';
 import {
     StyledContactListItem,
     StyledContactListItemButtonWrapper,
 } from '@components/ContactListItem/ContactListItem.styled';
 import { CallIcon, MoreIcon, MuteIcon } from '@components/Icons/Icons';
 
-import { Contact } from '@utils/types';
-
 type ContactListItemProps = {
-    contact: Contact;
+    contact: ContactInfoType;
 };
 export function ContactListItem({ contact }: ContactListItemProps) {
     const [visible, setVisible] = useState(false);

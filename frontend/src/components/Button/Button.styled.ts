@@ -58,7 +58,7 @@ const handleButtonBgPressedColor = (variant: BUTTON_TYPES) => {
     }
 };
 
-type ButtonStyleProps = {
+export type ButtonStyleProps = {
     variant: BUTTON_TYPES;
     disabled?: boolean;
     icon?: boolean;

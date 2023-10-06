@@ -9,7 +9,7 @@ import { StyledInput, StyledInputLabelWrapper } from './TextField.styled';
 type TextFieldProps = {
     label?: string;
     placeholder?: string;
-    onChange?: React.Dispatch<React.SetStateAction<string>>;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
     disabled?: boolean;
     width?: string;
@@ -32,7 +32,7 @@ export function TextField({
                 {label}
             </Typography>
             <StyledInput
-                onChange={() => onChange}
+                onChange={onChange}
                 value={value}
                 placeholder={placeholder}
                 disabled={disabled}
