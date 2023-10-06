@@ -13,6 +13,10 @@ export const StyledHeaderContainer = styled.header`
     border-bottom: 1px solid ${GreyColor.G60};
 `;
 
+export const StyledHeaderDummyContainer = styled.div`
+    ${StyledLayoutWrapper};
+`;
+
 export const StyledHeaderInnerContainer = styled.div`
     ${StyledLayoutInnerWrapper};
     justify-content: space-between;

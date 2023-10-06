@@ -4,6 +4,7 @@ import { BUTTON_TYPES, Button } from '@components/Button/Button';
 import { Dropdown } from '@components/Dropdown/Dropdown';
 import {
     StyledHeaderContainer,
+    StyledHeaderDummyContainer,
     StyledHeaderInnerContainer,
 } from '@components/Header/Header.styled';
 import {
@@ -54,42 +55,49 @@ export function Header({ title }: HeaderType) {
     ];
 
     return (
-        <StyledHeaderContainer>
-            <StyledLayoutSideWrapper $align={AlignType.END}>
-                <Button
-                    variant={BUTTON_TYPES.SECONDARY}
-                    icon={<BackArrowIcon />}
-                />
-            </StyledLayoutSideWrapper>
-            <StyledHeaderInnerContainer>
-                <Typography level={TypographyLevel.H1}>{title}</Typography>
-                <Flex>
-                    <Flex $gap={SpacingToken.PX8} $view={View.DESKTOP}>
-                        <Button
-                            variant={BUTTON_TYPES.SECONDARY}
-                            icon={<SettingsIcon />}
-                        />
-                        <Button
-                            variant={BUTTON_TYPES.SECONDARY}
-                            icon={profileIcon}
-                        />
-                    </Flex>
+        <>
+            <StyledHeaderDummyContainer>
+                <StyledLayoutSideWrapper />
+                <StyledHeaderInnerContainer />
+                <StyledLayoutSideWrapper />
+            </StyledHeaderDummyContainer>
+            <StyledHeaderContainer>
+                <StyledLayoutSideWrapper $align={AlignType.END}>
                     <Button
-                        variant={BUTTON_TYPES.SPECIAL}
-                        icon={<AddIcon />}
-                        label="Add new"
+                        variant={BUTTON_TYPES.SECONDARY}
+                        icon={<BackArrowIcon />}
                     />
-                    <Flex $view={View.MOBILE}>
-                        <Dropdown items={dropdownItems} />
+                </StyledLayoutSideWrapper>
+                <StyledHeaderInnerContainer>
+                    <Typography level={TypographyLevel.H1}>{title}</Typography>
+                    <Flex>
+                        <Flex $gap={SpacingToken.PX8} $view={View.DESKTOP}>
+                            <Button
+                                variant={BUTTON_TYPES.SECONDARY}
+                                icon={<SettingsIcon />}
+                            />
+                            <Button
+                                variant={BUTTON_TYPES.SECONDARY}
+                                icon={profileIcon}
+                            />
+                        </Flex>
+                        <Button
+                            variant={BUTTON_TYPES.SPECIAL}
+                            icon={<AddIcon />}
+                            label="Add new"
+                        />
+                        <Flex $view={View.MOBILE}>
+                            <Dropdown items={dropdownItems} />
+                        </Flex>
                     </Flex>
-                </Flex>
-            </StyledHeaderInnerContainer>
-            <StyledLayoutSideWrapper $align={AlignType.START}>
-                <Button
-                    variant={BUTTON_TYPES.SECONDARY}
-                    icon={<LightModeIcon />}
-                />
-            </StyledLayoutSideWrapper>
-        </StyledHeaderContainer>
+                </StyledHeaderInnerContainer>
+                <StyledLayoutSideWrapper $align={AlignType.START}>
+                    <Button
+                        variant={BUTTON_TYPES.SECONDARY}
+                        icon={<LightModeIcon />}
+                    />
+                </StyledLayoutSideWrapper>
+            </StyledHeaderContainer>
+        </>
     );
 }
