@@ -3,7 +3,7 @@ import React, { MouseEventHandler, ReactNode } from 'react';
 import { StyledListItem } from '@components/ListItem/ListItem.styled';
 import { Typography, TypographyLevel } from '@components/Typography/Typography';
 
-type ListItemProps = {
+export type ListItemProps = {
     icon?: ReactNode;
     label?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
