@@ -7,6 +7,13 @@ import { Dropdown } from './Dropdown';
 export default {
     title: 'Components / Dropdown',
     component: Dropdown,
+    decorators: [
+        (Story) => (
+            <div style={{ marginLeft: '5rem' }}>
+                <Story />
+            </div>
+        ),
+    ],
 } as Meta<typeof Dropdown>;
 
 type Story = StoryObj<typeof Dropdown>;

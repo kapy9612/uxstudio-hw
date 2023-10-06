@@ -3,11 +3,8 @@ import React from 'react';
 import { BUTTON_TYPES, Button } from '@components/Button/Button';
 import { Dropdown } from '@components/Dropdown/Dropdown';
 import {
-    Flex,
     StyledHeaderContainer,
-    StyledHeaderInnerWrapper,
-    StyledHeaderSideWrapper,
-    View,
+    StyledHeaderInnerContainer,
 } from '@components/Header/Header.styled';
 import {
     AddIcon,
@@ -15,6 +12,11 @@ import {
     LightModeIcon,
     SettingsIcon,
 } from '@components/Icons/Icons';
+import {
+    Flex,
+    StyledLayoutSideWrapper,
+    View,
+} from '@components/Layout/Layout.styled';
 import { Typography, TypographyLevel } from '@components/Typography/Typography';
 
 import { AlignType, SpacingToken } from '@styles/global';
@@ -53,13 +55,13 @@ export function Header({ title }: HeaderType) {
 
     return (
         <StyledHeaderContainer>
-            <StyledHeaderSideWrapper $align={AlignType.END}>
+            <StyledLayoutSideWrapper $align={AlignType.END}>
                 <Button
                     variant={BUTTON_TYPES.SECONDARY}
                     icon={<BackArrowIcon />}
                 />
-            </StyledHeaderSideWrapper>
-            <StyledHeaderInnerWrapper>
+            </StyledLayoutSideWrapper>
+            <StyledHeaderInnerContainer>
                 <Typography level={TypographyLevel.H1}>{title}</Typography>
                 <Flex>
                     <Flex $gap={SpacingToken.PX8} $view={View.DESKTOP}>
@@ -81,13 +83,13 @@ export function Header({ title }: HeaderType) {
                         <Dropdown items={dropdownItems} />
                     </Flex>
                 </Flex>
-            </StyledHeaderInnerWrapper>
-            <StyledHeaderSideWrapper $align={AlignType.START}>
+            </StyledHeaderInnerContainer>
+            <StyledLayoutSideWrapper $align={AlignType.START}>
                 <Button
                     variant={BUTTON_TYPES.SECONDARY}
                     icon={<LightModeIcon />}
                 />
-            </StyledHeaderSideWrapper>
+            </StyledLayoutSideWrapper>
         </StyledHeaderContainer>
     );
 }

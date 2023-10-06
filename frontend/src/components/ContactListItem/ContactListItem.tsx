@@ -9,13 +9,38 @@ import {
     StyledContactListItem,
     StyledContactListItemButtonWrapper,
 } from '@components/ContactListItem/ContactListItem.styled';
-import { CallIcon, MoreIcon, MuteIcon } from '@components/Icons/Icons';
+import { Dropdown } from '@components/Dropdown/Dropdown';
+import {
+    CallIcon,
+    DeleteIcon,
+    FavouriteIcon,
+    MuteIcon,
+    SettingsIcon,
+} from '@components/Icons/Icons';
 
 type ContactListItemProps = {
     contact: ContactInfoType;
 };
 export function ContactListItem({ contact }: ContactListItemProps) {
     const [visible, setVisible] = useState(false);
+
+    const dropdownItems = [
+        {
+            icon: <SettingsIcon />,
+            label: 'Edit',
+            onClick: () => console.error('Unsupported function!'),
+        },
+        {
+            icon: <FavouriteIcon />,
+            label: 'Favourite',
+            onClick: () => console.error('Unsupported function!'),
+        },
+        {
+            icon: <DeleteIcon />,
+            label: 'Remove',
+            onClick: () => console.error('Unsupported function!'),
+        },
+    ];
 
     return (
         <StyledContactListItem
@@ -37,10 +62,7 @@ export function ContactListItem({ contact }: ContactListItemProps) {
                         variant={BUTTON_TYPES.SECONDARY}
                         icon={<CallIcon />}
                     />
-                    <Button
-                        variant={BUTTON_TYPES.SECONDARY}
-                        icon={<MoreIcon />}
-                    />
+                    <Dropdown items={dropdownItems} />
                 </StyledContactListItemButtonWrapper>
             )}
         </StyledContactListItem>
