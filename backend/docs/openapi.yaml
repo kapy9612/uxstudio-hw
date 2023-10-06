@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: uxstudio api
+  version: 0.1.0
+  description: 'OpenAPI schema of the uxstudio challenge'
+paths:
+  /api/contact:
+    get:
+      tags:
+        - contact
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContactResponseItem'
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+    post:
+      tags:
+        - contact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreationRequest'
+      responses:
+        201:
+          description: Created (empty response)
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+  /api/contact/{id}:
+    get:
+      tags:
+        - contact
+      parameters:
+            - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactResponseItem'
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+    put:
+      tags:
+        - contact
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactUpdateRequest'
+      responses:
+        200:
+          description: Updated (empty response)
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+    delete:
+      tags:
+        - contact
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        204:
+          description: No content
+        404:
+          description: Not found
+        500:
+          description: Internal server error
+components:
+  parameters:
+    id:
+      in: path
+      name: id
+      required: true
+      schema:
+        $ref: '#/components/schemas/Id'
+  schemas:
+    Id:
+      type: integer
+      example: 1
+      description: An ID of an entity represented as an integer.
+    Phone:
+      type: string
+      example: '+36301234567'
+    Name:
+      type: string
+      example: 'Teszt Elek'
+    Email:
+      type: string
+      example: 'elek.teszt@uxstudio.hu'
+    Avatar:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Id'
+        url:
+          type: string
+          format: uri
+          example: 'https://storage.googleapis.com/uxstudio_bucket/assets/avatar1/avatar1.png'
+    AvatarBody:
+      type: string
+      example: 'IkhlbGxvLCB3b3JsZC4gSGVsbG8sIHdvcmxkLiBIZWxsbywgd29ybGQuIg=='
+      description: BASE64 encoded string
+    ContactResponseItem:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Id'
+        name:
+          $ref: '#/components/schemas/Name'
+        email:
+          $ref: '#/components/schemas/Email'
+        phone:
+          $ref: '#/components/schemas/Phone'
+        avatar:
+          $ref: '#/components/schemas/Avatar'
+      additionalProperties: false
+    ContactRequest:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        phone:
+          $ref: '#/components/schemas/Phone'
+        email:
+          $ref: '#/components/schemas/Email'
+        avatar:
+          $ref: '#/components/schemas/AvatarBody'
+      additionalProperties: false
+    ContactCreationRequest:
+      allOf:
+        - $ref: '#/components/schemas/ContactRequest'
+        - required:
+            - name
+    ContactUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/ContactRequest'
+        - description: At least one property is required.
