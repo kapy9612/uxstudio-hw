@@ -14,31 +14,51 @@ import {
 } from './PictureInputField.styled';
 
 type PictureInputFieldProps = {
-    onFileSelect: (file: File | null) => void;
+    onFileSelect: (file: File | null, base64?: string | null) => void;
+    preview?: string | null;
+    setAvatar?: React.Dispatch<React.SetStateAction<string>>;
     width?: string;
     testId?: string;
 };
 export function PictureInputField({
     width,
+    preview = null,
+    setAvatar,
     onFileSelect,
 }: PictureInputFieldProps) {
-    const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+    const [previewSrc, setPreviewSrc] = useState<string | null>(preview);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file');
+                return;
+            }
+
             const reader = new FileReader();
             reader.onloadend = () => {
                 // Use reader.result to set the previewSrc
-                setPreviewSrc(String(reader.result));
+                const base64String = String(reader.result);
+                setPreviewSrc(base64String);
+                onFileSelect(file, base64String);
             };
             reader.readAsDataURL(file);
-            onFileSelect(file);
+        } else {
+            // Handle file deselection/removal
+            setPreviewSrc(null);
+            if (setAvatar) {
+                setAvatar('');
+            }
+            onFileSelect(null, null);
         }
     };
 
     const removeImage = () => {
         setPreviewSrc(null);
+        if (setAvatar) {
+            setAvatar('');
+        }
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
         }

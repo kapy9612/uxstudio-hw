@@ -7,6 +7,7 @@ export const createPostDataObject = ({
     name,
     phone,
     email,
+    avatar,
 }: Omit<ContactType, 'id'>) => {
     let sendObj: Partial<ContactType> = {};
     if (name) {
@@ -19,6 +20,10 @@ export const createPostDataObject = ({
         sendObj.email = email;
     }
 
+    if (avatar) {
+        sendObj.avatar = avatar;
+    }
+
     return sendObj;
 };
 
@@ -26,6 +31,7 @@ export const createPutDataObject = ({
     name,
     phone,
     email,
+    avatar,
     contact,
 }: PutDataObjectType) => {
     let sendObj: Partial<ContactType> = {};
@@ -34,6 +40,9 @@ export const createPutDataObject = ({
     }
     if (phone !== contact.phone) {
         sendObj.phone = phone;
+    }
+    if (avatar !== contact.avatar) {
+        sendObj.avatar = avatar;
     }
     if (email !== contact.email) {
         if (email === '') {

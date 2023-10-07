@@ -1,7 +1,7 @@
 export type ContactType = {
     id: number;
-    avatar?: string;
+    avatar?: string | null;
     name: string;
-    phone?: string;
-    email?: string;
+    phone?: string | null;
+    email?: string | null;
 };

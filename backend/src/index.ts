@@ -8,6 +8,17 @@ var cors = require("cors");
 const prisma = new PrismaClient();
 const app = express();
 
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  }),
+);
+app.use(express.json());
+app.use(cors());
+
 let s3 = new S3Client({
   region: process.env.AWS_REGION,
   credentials: {
@@ -15,10 +26,6 @@ let s3 = new S3Client({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   },
 });
-
-app.use(express.json());
-app.use(bodyParser.json({ limit: "10mb" }));
-app.use(cors());
 
 app.post(`/api/contact`, async (req, res, next) => {
   const { name, phone, email, avatar } = req.body;
@@ -44,20 +51,23 @@ app.post(`/api/contact`, async (req, res, next) => {
   }
 });
 
-app.post("/upload", async (req, res) => {
+app.post("/api/upload", async (req, res) => {
   const { fileName, fileContent } = req.body;
 
   if (!fileName || !fileContent) {
     return res.status(400).send("File name and content are required");
   }
 
-  // Decode Base64
-  const decodedFileContent = Buffer.from(fileContent, "base64");
+  // Strip the data: URL prefix if it exists
+  const base64Data = fileContent.replace(/^data:image\/\w+;base64,/, "");
+
+  // Decode Base64 to binary data
+  const binaryData = Buffer.from(base64Data, "base64");
 
   const params = {
     Bucket: "uxstudio-challenge-bucket",
     Key: fileName,
-    Body: decodedFileContent,
+    Body: binaryData,
     ContentType: "image",
     ACL: "public-read",
   };
@@ -67,7 +77,7 @@ app.post("/upload", async (req, res) => {
     await s3.send(new PutObjectCommand(params));
 
     // On success, return file URL
-    const fileUrl = `https://${params.Bucket}.s3.${s3.config.region}.amazonaws.com/${params.Key}`;
+    const fileUrl = `https://${params.Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`;
     res.status(200).send({
       message: "File uploaded successfully!",
       fileUrl: fileUrl,

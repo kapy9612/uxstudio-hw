@@ -16,6 +16,7 @@ export const StyledListItemGroupWrapper = styled.div`
     border-radius: 0.5rem;
     background-color: ${GreyColor.G80};
     overflow: hidden;
+    z-index: 100;
 `;
 
 export const StyledDropdown = styled.div`

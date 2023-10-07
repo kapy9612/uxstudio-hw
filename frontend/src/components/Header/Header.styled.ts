@@ -15,6 +15,10 @@ export const StyledHeaderContainer = styled.header`
 
 export const StyledHeaderDummyContainer = styled.div`
     ${StyledLayoutWrapper};
+
+    @media (max-width: 592px) {
+        display: none;
+    }
 `;
 
 export const StyledHeaderInnerContainer = styled.div`

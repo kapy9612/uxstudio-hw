@@ -13,6 +13,7 @@ import { Typography, TypographyLevel } from '@components/Typography/Typography';
 import { useCreateContact } from '@hooks/useCreateContact';
 import { useUpdateContact } from '@hooks/useUpdateContact';
 
+import { postRequest } from '@utils/request';
 import { ContactType } from '@utils/types';
 
 export type Form = {
@@ -28,32 +29,48 @@ export function Form({ title, contact, closeModal }: Form) {
     const [email, setEmail] = useState<string>(
         contact?.email ? contact.email : '',
     );
-    const [file, setFile] = useState<File | null>(null);
+    const [avatar, setAvatar] = useState<string>(
+        contact?.avatar ? contact.avatar : '',
+    );
 
     const contactCreate = useCreateContact();
     const contactUpdate = useUpdateContact();
 
-    const handleFileSelect = useCallback((file: File | null) => {
-        setFile(file);
-        if (file) {
-            console.log('Selected file:', file.name);
-        } else {
-            console.log('File removed');
-        }
-    }, []);
+    const handleFileSelect = useCallback(
+        async (file: File | null, base64?: string | null) => {
+            if (file) {
+                try {
+                    const response: { fileUrl: string } = await postRequest(
+                        '/upload',
+                        {
+                            fileName: file?.name,
+                            fileContent: base64,
+                        },
+                    );
+
+                    setAvatar(response.fileUrl);
+                } catch (e) {
+                    alert('Error when uploading the picture.');
+                }
+            } else {
+                console.log('File removed');
+            }
+        },
+        [],
+    );
 
     return (
         <StyledForm
             onSubmit={(e) => {
                 e.preventDefault();
 
-                // console.log(file);
                 if (contact !== undefined) {
                     const sendObj = createPutDataObject({
                         name,
                         phone,
                         email,
                         contact,
+                        avatar,
                     });
                     contactUpdate.mutate({ updated: sendObj, id: contact.id });
                 } else {
@@ -61,6 +78,7 @@ export function Form({ title, contact, closeModal }: Form) {
                         name,
                         phone,
                         email,
+                        avatar,
                     });
                     contactCreate.mutate(sendObj as Omit<ContactType, 'id'>);
                 }
@@ -71,7 +89,11 @@ export function Form({ title, contact, closeModal }: Form) {
             }}
         >
             <Typography level={TypographyLevel.H2}>{title}</Typography>
-            <PictureInputField onFileSelect={handleFileSelect} />
+            <PictureInputField
+                preview={contact?.avatar}
+                setAvatar={setAvatar}
+                onFileSelect={handleFileSelect}
+            />
             <TextField
                 placeholder="Jamie Wright"
                 label="Name"

@@ -18,6 +18,7 @@ import {
 import { Overlay } from '@components/Overlay/Overlay';
 
 import { useDeleteContact } from '@hooks/useDeleteContact';
+import { useMatchMedia } from '@hooks/useMatchMedia';
 import { useModal } from '@hooks/useModal';
 
 import { ContactType } from '@utils/types';
@@ -29,6 +30,7 @@ export function ContactListItem({ contact }: ContactListItemProps) {
     const [visible, setVisible] = useState(false);
     const { isOpen, openModal, closeModal } = useModal();
     const contactDelete = useDeleteContact();
+    const isMobile = useMatchMedia();
     const dropdownItems = [
         {
             icon: <SettingsIcon />,
@@ -56,30 +58,61 @@ export function ContactListItem({ contact }: ContactListItemProps) {
         },
     ];
 
+    const mobileDropDownItems = [
+        ...dropdownItems,
+        {
+            icon: <MuteIcon />,
+            label: 'Mute',
+            onClick: () => alert('Unsupported function!'),
+        },
+        {
+            icon: <CallIcon />,
+            label: 'Call',
+            onClick: () => alert('Unsupported function!'),
+        },
+    ];
+
     return (
         <>
             <StyledContactListItem
-                onMouseEnter={() => setVisible(true)}
-                onMouseLeave={() => setVisible(false)}
+                onMouseEnter={() => {
+                    setVisible(true);
+                }}
+                onMouseLeave={() => {
+                    setVisible(false);
+                }}
             >
                 <ContactInfo
                     avatar={contact.avatar}
                     name={contact.name}
                     phone={contact.phone}
                 />
-                {visible && (
+                {(visible || isMobile) && (
                     <StyledContactListItemButtonWrapper>
-                        <Button
-                            variant={BUTTON_TYPES.SECONDARY}
-                            icon={<MuteIcon />}
-                            onClick={() => alert('Unsupported function!')}
+                        {!isMobile && (
+                            <>
+                                <Button
+                                    variant={BUTTON_TYPES.SECONDARY}
+                                    icon={<MuteIcon />}
+                                    onClick={() =>
+                                        alert('Unsupported function!')
+                                    }
+                                />
+                                <Button
+                                    variant={BUTTON_TYPES.SECONDARY}
+                                    icon={<CallIcon />}
+                                    onClick={() =>
+                                        alert('Unsupported function!')
+                                    }
+                                />
+                            </>
+                        )}
+
+                        <Dropdown
+                            items={
+                                isMobile ? mobileDropDownItems : dropdownItems
+                            }
                         />
-                        <Button
-                            variant={BUTTON_TYPES.SECONDARY}
-                            icon={<CallIcon />}
-                            onClick={() => alert('Unsupported function!')}
-                        />
-                        <Dropdown items={dropdownItems} />
                     </StyledContactListItemButtonWrapper>
                 )}
             </StyledContactListItem>
