@@ -28,6 +28,9 @@ let s3 = new S3Client({
   },
 });
 
+app.get("/", (req, res) => {
+  res.send("uxstudio challenge API running 🥳");
+});
 app.post(`/api/contact`, async (req, res, next) => {
   const { name, phone, email, avatar } = req.body;
 
