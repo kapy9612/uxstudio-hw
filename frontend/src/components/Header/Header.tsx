@@ -36,22 +36,22 @@ export function Header({ title, openModal }: HeaderType) {
         {
             icon: <BackArrowIcon />,
             label: 'Back',
-            onClick: () => console.error('Unsupported function!'),
+            onClick: () => alert('Unsupported function!'),
         },
         {
             icon: <SettingsIcon />,
             label: 'Settings',
-            onClick: () => console.error('Unsupported function!'),
+            onClick: () => alert('Unsupported function!'),
         },
         {
             icon: <LightModeIcon />,
             label: 'Light',
-            onClick: () => console.error('Unsupported function!'),
+            onClick: () => alert('Unsupported function!'),
         },
         {
             icon: profileIcon,
             label: 'Profile',
-            onClick: () => console.error('Unsupported function!'),
+            onClick: () => alert('Unsupported function!'),
         },
     ];
 
@@ -67,6 +67,7 @@ export function Header({ title, openModal }: HeaderType) {
                     <Button
                         variant={BUTTON_TYPES.SECONDARY}
                         icon={<BackArrowIcon />}
+                        onClick={() => alert('Unsupported function!')}
                     />
                 </StyledLayoutSideWrapper>
                 <StyledHeaderInnerContainer>
@@ -76,10 +77,12 @@ export function Header({ title, openModal }: HeaderType) {
                             <Button
                                 variant={BUTTON_TYPES.SECONDARY}
                                 icon={<SettingsIcon />}
+                                onClick={() => alert('Unsupported function!')}
                             />
                             <Button
                                 variant={BUTTON_TYPES.SECONDARY}
                                 icon={profileIcon}
+                                onClick={() => alert('Unsupported function!')}
                             />
                         </Flex>
                         <Button
@@ -97,6 +100,7 @@ export function Header({ title, openModal }: HeaderType) {
                     <Button
                         variant={BUTTON_TYPES.SECONDARY}
                         icon={<LightModeIcon />}
+                        onClick={() => alert('Unsupported function!')}
                     />
                 </StyledLayoutSideWrapper>
             </StyledHeaderContainer>

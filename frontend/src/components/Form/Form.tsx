@@ -1,12 +1,17 @@
 import React, { useCallback, useState } from 'react';
 
 import { BUTTON_TYPES, Button } from '@components/Button/Button';
+import {
+    createPostDataObject,
+    createPutDataObject,
+} from '@components/Form/Form.functions';
 import { StyledButtonWrapper, StyledForm } from '@components/Form/Form.styled';
 import { PictureInputField } from '@components/PictureInputField/PictureInputField';
 import { TextField } from '@components/TextField/TextField';
 import { Typography, TypographyLevel } from '@components/Typography/Typography';
 
 import { useCreateContact } from '@hooks/useCreateContact';
+import { useUpdateContact } from '@hooks/useUpdateContact';
 
 import { ContactType } from '@utils/types';
 
@@ -26,6 +31,7 @@ export function Form({ title, contact, closeModal }: Form) {
     const [file, setFile] = useState<File | null>(null);
 
     const contactCreate = useCreateContact();
+    const contactUpdate = useUpdateContact();
 
     const handleFileSelect = useCallback((file: File | null) => {
         setFile(file);
@@ -40,11 +46,25 @@ export function Form({ title, contact, closeModal }: Form) {
         <StyledForm
             onSubmit={(e) => {
                 e.preventDefault();
-                console.log(name);
-                console.log(phone);
-                console.log(email);
+
                 // console.log(file);
-                contactCreate.mutate({ name, phone, email });
+                if (contact !== undefined) {
+                    const sendObj = createPutDataObject({
+                        name,
+                        phone,
+                        email,
+                        contact,
+                    });
+                    contactUpdate.mutate({ updated: sendObj, id: contact.id });
+                } else {
+                    const sendObj = createPostDataObject({
+                        name,
+                        phone,
+                        email,
+                    });
+                    contactCreate.mutate(sendObj as Omit<ContactType, 'id'>);
+                }
+
                 if (closeModal) {
                     closeModal();
                 }

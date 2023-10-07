@@ -7,6 +7,7 @@ import {
     StyledContactListItemButtonWrapper,
 } from '@components/ContactListItem/ContactListItem.styled';
 import { Dropdown } from '@components/Dropdown/Dropdown';
+import { Form } from '@components/Form/Form';
 import {
     CallIcon,
     DeleteIcon,
@@ -14,8 +15,10 @@ import {
     MuteIcon,
     SettingsIcon,
 } from '@components/Icons/Icons';
+import { Overlay } from '@components/Overlay/Overlay';
 
 import { useDeleteContact } from '@hooks/useDeleteContact';
+import { useModal } from '@hooks/useModal';
 
 import { ContactType } from '@utils/types';
 
@@ -24,6 +27,7 @@ type ContactListItemProps = {
 };
 export function ContactListItem({ contact }: ContactListItemProps) {
     const [visible, setVisible] = useState(false);
+    const { isOpen, openModal, closeModal } = useModal();
     const contactDelete = useDeleteContact();
     const dropdownItems = [
         {
@@ -31,7 +35,7 @@ export function ContactListItem({ contact }: ContactListItemProps) {
             label: 'Edit',
             onClick: () => {
                 setVisible(false);
-                console.error('Unsupported function!');
+                openModal();
             },
         },
         {
@@ -39,7 +43,7 @@ export function ContactListItem({ contact }: ContactListItemProps) {
             label: 'Favourite',
             onClick: () => {
                 setVisible(false);
-                console.error('Unsupported function!');
+                alert('Unsupported function!');
             },
         },
         {
@@ -53,28 +57,41 @@ export function ContactListItem({ contact }: ContactListItemProps) {
     ];
 
     return (
-        <StyledContactListItem
-            onMouseEnter={() => setVisible(true)}
-            onMouseLeave={() => setVisible(false)}
-        >
-            <ContactInfo
-                avatar={contact.avatar}
-                name={contact.name}
-                phone={contact.phone}
-            />
-            {visible && (
-                <StyledContactListItemButtonWrapper>
-                    <Button
-                        variant={BUTTON_TYPES.SECONDARY}
-                        icon={<MuteIcon />}
+        <>
+            <StyledContactListItem
+                onMouseEnter={() => setVisible(true)}
+                onMouseLeave={() => setVisible(false)}
+            >
+                <ContactInfo
+                    avatar={contact.avatar}
+                    name={contact.name}
+                    phone={contact.phone}
+                />
+                {visible && (
+                    <StyledContactListItemButtonWrapper>
+                        <Button
+                            variant={BUTTON_TYPES.SECONDARY}
+                            icon={<MuteIcon />}
+                            onClick={() => alert('Unsupported function!')}
+                        />
+                        <Button
+                            variant={BUTTON_TYPES.SECONDARY}
+                            icon={<CallIcon />}
+                            onClick={() => alert('Unsupported function!')}
+                        />
+                        <Dropdown items={dropdownItems} />
+                    </StyledContactListItemButtonWrapper>
+                )}
+            </StyledContactListItem>
+            {isOpen && (
+                <Overlay>
+                    <Form
+                        title="Add contact"
+                        closeModal={closeModal}
+                        contact={contact}
                     />
-                    <Button
-                        variant={BUTTON_TYPES.SECONDARY}
-                        icon={<CallIcon />}
-                    />
-                    <Dropdown items={dropdownItems} />
-                </StyledContactListItemButtonWrapper>
+                </Overlay>
             )}
-        </StyledContactListItem>
+        </>
     );
 }
