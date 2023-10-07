@@ -4,6 +4,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import bodyParser from "body-parser";
 import "dotenv/config";
 var cors = require("cors");
+const port = process.env.PORT || 3000;
 
 const prisma = new PrismaClient();
 const app = express();
@@ -154,6 +155,6 @@ app.delete(`/api/contact/:id`, async (req, res, next) => {
   }
 });
 
-const server = app.listen(process.env.PORT, () =>
-  console.log(`🚀 Server ready at: ${process.env.PORT}`),
+const server = app.listen(port, () =>
+  console.log(`🚀 Server ready at: http://localhost:${port}`),
 );
