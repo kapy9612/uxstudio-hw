@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 
 import { BUTTON_TYPES, Button } from '@components/Button/Button';
-import {
-    ContactInfo,
-    ContactInfoType,
-} from '@components/ContactInfo/ContactInfo';
+import { ContactInfo } from '@components/ContactInfo/ContactInfo';
 import {
     StyledContactListItem,
     StyledContactListItemButtonWrapper,
@@ -18,12 +15,16 @@ import {
     SettingsIcon,
 } from '@components/Icons/Icons';
 
+import { useDeleteContact } from '@hooks/useDeleteContact';
+
+import { ContactType } from '@utils/types';
+
 type ContactListItemProps = {
-    contact: ContactInfoType;
+    contact: ContactType;
 };
 export function ContactListItem({ contact }: ContactListItemProps) {
     const [visible, setVisible] = useState(false);
-
+    const contactDelete = useDeleteContact();
     const dropdownItems = [
         {
             icon: <SettingsIcon />,
@@ -46,7 +47,7 @@ export function ContactListItem({ contact }: ContactListItemProps) {
             label: 'Remove',
             onClick: () => {
                 setVisible(false);
-                console.error('Unsupported function!');
+                contactDelete.mutate({ id: contact.id });
             },
         },
     ];

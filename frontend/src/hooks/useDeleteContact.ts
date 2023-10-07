@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from 'react-query';
 
-import { postRequest } from '@utils/request';
+import { deleteRequest } from '@utils/request';
 import { ContactType } from '@utils/types';
 
-export const useCreateContact = () => {
+export const useDeleteContact = () => {
     const queryClient = useQueryClient();
     return useMutation(
-        (newPost: Omit<ContactType, 'id'>) =>
-            postRequest<Omit<ContactType, 'id'>>('/contact', newPost),
+        (post: Pick<ContactType, 'id'>) =>
+            deleteRequest<Pick<ContactType, 'id'>>(`/contact/${post.id}`),
         {
             onSuccess: () => {
                 void queryClient.invalidateQueries({ queryKey: ['contacts'] });

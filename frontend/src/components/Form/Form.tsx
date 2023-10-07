@@ -6,6 +6,8 @@ import { PictureInputField } from '@components/PictureInputField/PictureInputFie
 import { TextField } from '@components/TextField/TextField';
 import { Typography, TypographyLevel } from '@components/Typography/Typography';
 
+import { useCreateContact } from '@hooks/useCreateContact';
+
 import { ContactType } from '@utils/types';
 
 export type Form = {
@@ -23,6 +25,8 @@ export function Form({ title, contact, closeModal }: Form) {
     );
     const [file, setFile] = useState<File | null>(null);
 
+    const contactCreate = useCreateContact();
+
     const handleFileSelect = useCallback((file: File | null) => {
         setFile(file);
         if (file) {
@@ -39,7 +43,11 @@ export function Form({ title, contact, closeModal }: Form) {
                 console.log(name);
                 console.log(phone);
                 console.log(email);
-                console.log(file);
+                // console.log(file);
+                contactCreate.mutate({ name, phone, email });
+                if (closeModal) {
+                    closeModal();
+                }
             }}
         >
             <Typography level={TypographyLevel.H2}>{title}</Typography>
@@ -48,6 +56,7 @@ export function Form({ title, contact, closeModal }: Form) {
                 placeholder="Jamie Wright"
                 label="Name"
                 value={name}
+                required
                 onChange={(e) => setName(e.target.value)}
             />
             <TextField

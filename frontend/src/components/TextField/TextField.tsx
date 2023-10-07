@@ -12,6 +12,7 @@ type TextFieldProps = {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
     disabled?: boolean;
+    required?: boolean;
     width?: string;
     testId?: string;
 };
@@ -22,6 +23,7 @@ export function TextField({
     value,
     width,
     disabled,
+    required,
 }: TextFieldProps) {
     return (
         <StyledInputLabelWrapper $width={width} $disabled={disabled}>
@@ -36,6 +38,7 @@ export function TextField({
                 value={value}
                 placeholder={placeholder}
                 disabled={disabled}
+                required={required}
             />
         </StyledInputLabelWrapper>
     );

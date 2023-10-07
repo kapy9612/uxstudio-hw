@@ -14,7 +14,7 @@ import { ContactType } from '@utils/types';
 
 import { TextColor } from '@styles/global';
 
-export type ContactInfoType = Omit<ContactType, 'email'>;
+export type ContactInfoType = Omit<ContactType, 'email' | 'id'>;
 export function ContactInfo({ avatar, name, phone }: ContactInfoType) {
     return (
         <StyledContactInfo>
