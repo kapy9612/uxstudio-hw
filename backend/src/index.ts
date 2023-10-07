@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import bodyParser from "body-parser";
 import "dotenv/config";
-var cors = require("cors");
+let cors = require("cors");
 const port = process.env.PORT || 3000;
 
 const prisma = new PrismaClient();
@@ -90,7 +90,7 @@ app.post("/api/upload", async (req, res) => {
   }
 });
 
-app.get("/api/contact", async (req, res, next) => {
+app.get("/api/contact", async (_req, res, next) => {
   try {
     const users = await prisma.contact.findMany();
     res.json(users);
@@ -142,7 +142,7 @@ app.put("/api/contact/:id", async (req, res) => {
 app.delete(`/api/contact/:id`, async (req, res, next) => {
   const { id } = req.params;
   try {
-    const contact = await prisma.contact.delete({
+    await prisma.contact.delete({
       where: {
         id: Number(id),
       },
@@ -155,6 +155,9 @@ app.delete(`/api/contact/:id`, async (req, res, next) => {
   }
 });
 
-const server = app.listen(port, () =>
+app.listen(port, () =>
   console.log(`🚀 Server ready at: http://localhost:${port}`),
 );
+
+// Export the Express API
+module.exports = app;
