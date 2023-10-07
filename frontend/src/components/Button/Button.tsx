@@ -2,12 +2,10 @@ import React, { MouseEventHandler, ReactElement } from 'react';
 
 import { AlignType } from '@styles/global';
 
-import { navigateToLink } from './Button.functions';
 import { StyledButton } from './Button.styled';
 
 type ButtonProps = {
     label?: string;
-    link?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     type?: 'submit' | 'reset' | 'button';
     variant: BUTTON_TYPES;
@@ -27,7 +25,6 @@ export enum BUTTON_TYPES {
 //TODO: Special variant linear gradient animate
 export function Button({
     label,
-    link,
     onClick,
     type,
     variant,
@@ -40,7 +37,7 @@ export function Button({
     return (
         <StyledButton
             data-testid={testId}
-            onClick={link && link !== '' ? navigateToLink(link!) : onClick}
+            onClick={onClick}
             $variant={variant}
             disabled={disabled}
             type={type}

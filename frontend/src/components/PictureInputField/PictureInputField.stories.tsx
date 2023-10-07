@@ -10,8 +10,5 @@ export default {
 type Story = StoryObj<typeof PictureInputField>;
 
 export const Default: Story = {
-    args: {
-        label: 'Label',
-        placeholder: 'Example',
-    },
+    args: {},
 };

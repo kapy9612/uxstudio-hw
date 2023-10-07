@@ -14,6 +14,7 @@ type Story = StoryObj<typeof ContactListItem>;
 export const Default: Story = {
     args: {
         contact: {
+            id: 1,
             name: 'Jonas Jones',
             avatar: dummyAvatar.src,
             phone: '+36 01 234 5678',

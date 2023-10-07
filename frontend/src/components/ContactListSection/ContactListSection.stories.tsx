@@ -15,24 +15,28 @@ export const Default: Story = {
     args: {
         data: [
             {
+                id: 1,
                 name: 'Jonas Jones',
                 avatar: dummyAvatar.src,
                 phone: '+36 01 234 5678',
                 email: 'dummy1@email.com',
             },
             {
+                id: 2,
                 name: 'Jonas Jones',
                 avatar: dummyAvatar.src,
                 phone: '+36 01 234 5678',
                 email: 'dummy2@email.com',
             },
             {
+                id: 3,
                 name: 'Jonas Jones',
                 avatar: dummyAvatar.src,
                 phone: '+36 01 234 5678',
                 email: 'dummy3@email.com',
             },
             {
+                id: 4,
                 name: 'Jonas Jones',
                 avatar: dummyAvatar.src,
                 phone: '+36 01 234 5678',
