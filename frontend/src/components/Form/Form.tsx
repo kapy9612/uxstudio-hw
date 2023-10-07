@@ -11,8 +11,9 @@ import { ContactType } from '@utils/types';
 export type Form = {
     title: string;
     contact?: ContactType;
+    closeModal?: () => void;
 };
-export function Form({ title, contact }: Form) {
+export function Form({ title, contact, closeModal }: Form) {
     const [name, setName] = useState<string>(contact?.name ? contact.name : '');
     const [phone, setPhone] = useState<string>(
         contact?.phone ? contact.phone : '',
@@ -62,7 +63,11 @@ export function Form({ title, contact }: Form) {
                 onChange={(e) => setEmail(e.target.value)}
             />
             <StyledButtonWrapper>
-                <Button variant={BUTTON_TYPES.SECONDARY} label={'Cancel'} />
+                <Button
+                    variant={BUTTON_TYPES.SECONDARY}
+                    label={'Cancel'}
+                    onClick={closeModal}
+                />
                 <Button
                     variant={BUTTON_TYPES.PRIMARY}
                     label={'Done'}

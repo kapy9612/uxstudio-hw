@@ -26,9 +26,10 @@ import profile from '@assets/ProfilePic.svg';
 
 export type HeaderType = {
     title: string;
+    openModal?: () => void;
 };
 
-export function Header({ title }: HeaderType) {
+export function Header({ title, openModal }: HeaderType) {
     const profileIcon = <img src={profile.src} alt="profile-pic" />;
 
     const dropdownItems = [
@@ -85,6 +86,7 @@ export function Header({ title }: HeaderType) {
                             variant={BUTTON_TYPES.SPECIAL}
                             icon={<AddIcon />}
                             label="Add new"
+                            onClick={openModal}
                         />
                         <Flex $view={View.MOBILE}>
                             <Dropdown items={dropdownItems} />

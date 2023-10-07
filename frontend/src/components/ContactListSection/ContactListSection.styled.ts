@@ -12,4 +12,5 @@ export const StyledContactListSectionContainer = styled.section`
 export const StyledContactListSectionInnerContainer = styled.div`
     ${StyledLayoutInnerWrapper};
     flex-direction: column;
+    height: calc(100vh - 12rem - 2px);
 `;

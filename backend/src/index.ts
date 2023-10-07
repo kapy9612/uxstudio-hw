@@ -1,13 +1,24 @@
-import { PrismaClient } from "@prisma/client";
 import express from "express";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { PrismaClient } from "@prisma/client";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import bodyParser from "body-parser";
+import "dotenv/config";
+var cors = require("cors");
 
 const prisma = new PrismaClient();
 const app = express();
 
+let s3 = new S3Client({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+});
+
 app.use(express.json());
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(cors());
 
 app.post(`/api/contact`, async (req, res, next) => {
   const { name, phone, email, avatar } = req.body;
@@ -30,6 +41,41 @@ app.post(`/api/contact`, async (req, res, next) => {
   } catch (e) {
     res.json(e);
     next(e);
+  }
+});
+
+app.post("/upload", async (req, res) => {
+  const { fileName, fileContent } = req.body;
+
+  if (!fileName || !fileContent) {
+    return res.status(400).send("File name and content are required");
+  }
+
+  // Decode Base64
+  const decodedFileContent = Buffer.from(fileContent, "base64");
+
+  const params = {
+    Bucket: "uxstudio-challenge-bucket",
+    Key: fileName,
+    Body: decodedFileContent,
+    ContentType: "image",
+    ACL: "public-read",
+  };
+
+  try {
+    // Upload to S3
+    await s3.send(new PutObjectCommand(params));
+
+    // On success, return file URL
+    const fileUrl = `https://${params.Bucket}.s3.${s3.config.region}.amazonaws.com/${params.Key}`;
+    res.status(200).send({
+      message: "File uploaded successfully!",
+      fileUrl: fileUrl,
+    });
+  } catch (err) {
+    // Handle errors
+    console.error("Error uploading file:", err);
+    res.status(500).send("Error uploading file");
   }
 });
 
@@ -98,6 +144,6 @@ app.delete(`/api/contact/:id`, async (req, res, next) => {
   }
 });
 
-const server = app.listen(3000, () =>
-  console.log(`🚀 Server ready at: http://localhost:3000`),
+const server = app.listen(process.env.PORT, () =>
+  console.log(`🚀 Server ready at: ${process.env.PORT}`),
 );
