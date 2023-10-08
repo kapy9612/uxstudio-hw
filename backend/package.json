@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate --schema=prisma/schema.production.prisma",
     "start": "ts-node src/index.ts",
     "build": "tsc",
     "dev": "nodemon src/index.ts"
