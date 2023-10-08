@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "./generated/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import ContactCreateInput = Prisma.ContactCreateInput;
 
 const prisma = new PrismaClient();
