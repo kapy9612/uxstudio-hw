@@ -1,13 +1,15 @@
 {
   "version": 2,
-  
-  "author": "",
-  "config": {
-    
-  },
-  "createAt": "",
-  "homepage": "",
-  "identifier": "",
-  "meta": {},
-  "schemaVersion": 0
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "src/index.ts"
+    }
+  ]
 }
