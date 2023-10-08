@@ -19,6 +19,10 @@ export const StyledHeaderDummyContainer = styled.div`
     @media (max-width: 592px) {
         display: none;
     }
+
+    @media (max-height: 592px) {
+        display: none;
+    }
 `;
 
 export const StyledHeaderInnerContainer = styled.div`

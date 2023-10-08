@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ContactListItem } from '@components/ContactListItem/ContactListItem';
 import {
+    StyledContactListGroupWrapper,
     StyledContactListSectionContainer,
     StyledContactListSectionInnerContainer,
 } from '@components/ContactListSection/ContactListSection.styled';
@@ -18,10 +19,12 @@ export function ContactListSection({ data }: ContactListSectionType) {
         <StyledContactListSectionContainer>
             <StyledLayoutSideWrapper />
             <StyledContactListSectionInnerContainer>
-                {data &&
-                    data.map((item) => (
-                        <ContactListItem contact={item} key={item.email} />
-                    ))}
+                <StyledContactListGroupWrapper>
+                    {data &&
+                        data.map((item) => (
+                            <ContactListItem contact={item} key={item.email} />
+                        ))}
+                </StyledContactListGroupWrapper>
             </StyledContactListSectionInnerContainer>
             <StyledLayoutSideWrapper />
         </StyledContactListSectionContainer>
