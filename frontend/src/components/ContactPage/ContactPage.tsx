@@ -9,7 +9,6 @@ import { Overlay } from '@components/Overlay/Overlay';
 import { useContacts } from '@hooks/useContacts';
 import { useModal } from '@hooks/useModal';
 
-//TODO: loading screen
 const ContactPage = () => {
     const contacts = useContacts();
     const { isOpen, openModal, closeModal } = useModal();
