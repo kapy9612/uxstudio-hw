@@ -18,8 +18,8 @@ import {
 import { Overlay } from '@components/Overlay/Overlay';
 
 import { useDeleteContact } from '@hooks/useDeleteContact';
-import { useMatchMedia } from '@hooks/useMatchMedia';
 import { useModal } from '@hooks/useModal';
+import { useTouchFunction } from '@hooks/useTouchFunction';
 
 import { ContactType } from '@utils/types';
 
@@ -30,7 +30,7 @@ export function ContactListItem({ contact }: ContactListItemProps) {
     const [visible, setVisible] = useState(false);
     const { isOpen, openModal, closeModal } = useModal();
     const contactDelete = useDeleteContact();
-    const isMobile = useMatchMedia();
+    const isMobile = useTouchFunction();
     const dropdownItems = [
         {
             icon: <SettingsIcon />,
