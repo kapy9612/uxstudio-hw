@@ -36,7 +36,8 @@ Navigate to the frontend directory and execute:
 ```bash
 cd frontend
 npm install
-npm run start
+npm run build
+npm start
 ```
 
 #### Environment Variables
