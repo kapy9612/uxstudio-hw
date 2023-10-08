@@ -8,9 +8,10 @@ try {
   // Execute the Prisma generate command with the dynamically determined schema path
   if (process.env.VERCEL_NODE_ENV === "production") {
     execSync(`prisma generate --schema=${schemaPath}`, { stdio: "inherit" });
-    execSync(`prisma db push --schema=${schemaPath}`, {
-      stdio: "inherit",
-    });
+    // NOTE: Only required on first build after db
+    // execSync(`prisma db push --schema=${schemaPath}`, {
+    //   stdio: "inherit",
+    // });
     console.log("Prisma Client generated successfully!");
   }
 } catch (error: unknown) {
