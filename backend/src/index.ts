@@ -1,12 +1,20 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import bodyParser from "body-parser";
 import "dotenv/config";
 let cors = require("cors");
 const port = process.env.PORT || 3000;
 
-const prisma = new PrismaClient();
+let prismaClient;
+
+if (process.env.VERCEL_NODE_ENV === "production") {
+  prismaClient = require("../prisma/generated/client").PrismaClient;
+} else {
+  prismaClient = require("@prisma/client").PrismaClient;
+}
+
+const prisma = new prismaClient();
+
 const app = express();
 
 app.use(bodyParser.json({ limit: "50mb" }));
