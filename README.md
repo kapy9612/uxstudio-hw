@@ -2,7 +2,7 @@
 
 ## 🚀 Overview
 
-A full-stack application that manages contacts and handles file uploads via AWS S3. The backend is implemented using Express.js with TypeScript, and the frontend is developed using Next.js with Typescript.
+A full-stack application that manages contacts and handles file uploads via AWS S3. The backend is implemented using Express.js with TypeScript, and the frontend is developed using Next.js with Typescript. You can check the UI components in Storybook.
 
 ## 🌐 Live Demos
 
