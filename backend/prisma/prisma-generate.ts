@@ -6,7 +6,7 @@ console.log(`NODE_ENV: ${process.env.VERCEL_NODE_ENV}`);
 
 try {
   // Execute the Prisma generate command with the dynamically determined schema path
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.VERCEL_NODE_ENV === "production") {
     execSync(`prisma generate --schema=${schemaPath}`, { stdio: "inherit" });
     console.log("Prisma Client generated successfully!");
   }
