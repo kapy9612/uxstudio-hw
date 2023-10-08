@@ -161,6 +161,3 @@ app.delete(`/api/contact/:id`, async (req, res, next) => {
 app.listen(port, () =>
   console.log(`🚀 Server ready at: http://localhost:${port}`),
 );
-
-// Export the Express API
-module.exports = app;

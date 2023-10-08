@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "prisma generate",
-    "start": "node ./dist/src/index.js",
+    "start": "ts-node src/index.ts",
     "build": "tsc",
     "dev": "nodemon src/index.ts"
   },
