@@ -2,6 +2,7 @@ import { execSync } from "child_process";
 import "dotenv/config";
 
 const schemaPath: string = `prisma/schema.${process.env.NODE_ENV}.prisma`;
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 
 try {
   // Execute the Prisma generate command with the dynamically determined schema path
