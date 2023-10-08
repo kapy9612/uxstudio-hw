@@ -13,6 +13,8 @@ try {
     //   stdio: "inherit",
     // });
     console.log("Prisma Client generated successfully!");
+  } else {
+    execSync(`prisma generate`, { stdio: "inherit" });
   }
 } catch (error: unknown) {
   // Log an error message if the command fails
