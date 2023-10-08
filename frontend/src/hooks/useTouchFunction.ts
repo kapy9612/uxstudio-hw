@@ -4,7 +4,7 @@ export const useTouchFunction = () => {
     const [isTouch, setIsTouch] = useState(false);
 
     useEffect(() => {
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        if ('ontouchstart' in window) {
             setIsTouch(true);
         }
     }, []);
