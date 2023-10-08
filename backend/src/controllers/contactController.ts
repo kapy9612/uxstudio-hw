@@ -57,7 +57,7 @@ export default {
     const { name, phone, email, avatar } = req.body;
 
     try {
-      const contact = await contactService.updateContact(id!, {
+      const contact = await contactService.updateContact(Number(id!), {
         name,
         email,
         avatar,
@@ -74,7 +74,7 @@ export default {
   delete: async (req: Request, res: Response, next: NextFunction) => {
     const { id }: { id?: number } = req.params;
     try {
-      await contactService.deleteContact(id!);
+      await contactService.deleteContact(Number(id!));
 
       res.status(201).send({ message: "Successfully deleted." });
     } catch (e) {
