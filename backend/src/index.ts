@@ -1,5 +1,5 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../prisma/generated/client";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import bodyParser from "body-parser";
 import "dotenv/config";
